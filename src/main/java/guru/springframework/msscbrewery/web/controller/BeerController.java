@@ -17,11 +17,9 @@ import java.util.UUID;
 public class BeerController {
 
     private final BeerService beerService;
-
     public BeerController(BeerService beerService) {
         this.beerService = beerService;
     }
-
     @GetMapping({"/{beerId}"})
     public ResponseEntity<BeerDto> getBeer(@PathVariable("beerId") UUID beerId){
 
@@ -30,10 +28,10 @@ public class BeerController {
 
     @PostMapping
     public ResponseEntity<BeerDto> postBeer(@RequestBody BeerDto beer){
-        BeerDto savedbeer = beerService.savedNewBeer(beer);
+        BeerDto savedBeer = beerService.savedNewBeer(beer);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "http://localhost:8080/api/v1/beer/" + savedbeer.getId().toString());
+        headers.add("Location", "http://localhost:8080/api/v1/beer/" + savedBeer.getId().toString());
 
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
